@@ -151,19 +151,19 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-test-img" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-local-img" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/27/test-img/">测试插入图片</a>
+      <a class="article-title" href="/2017/09/27/local-img/">Hexo插入本地图片</a>
     </h1>
   
 
         
-        <a href="/2017/09/27/test-img/" class="archive-article-date">
+        <a href="/2017/09/27/local-img/" class="archive-article-date">
   	<time datetime="2017-09-27T03:27:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-27</time>
 </a>
         
@@ -173,8 +173,10 @@
       
         <h3 id="修改主配置"><a href="#修改主配置" class="headerlink" title="修改主配置"></a>修改主配置</h3><p>_config.yml<br>post_asset_folder: true</p>
 <h3 id="安装-hexo-asset-image"><a href="#安装-hexo-asset-image" class="headerlink" title="安装 hexo-asset-image"></a>安装 hexo-asset-image</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-asset-image --save</div></pre></td></tr></table></figure>
-<h3 id="生成页面"><a href="#生成页面" class="headerlink" title="生成页面"></a>生成页面</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo n <span class="string">"test-img"</span></div></pre></td></tr></table></figure>
-<h3 id="md-引图片"><a href="#md-引图片" class="headerlink" title="md 引图片"></a>md 引图片</h3><p>将图片生成的test-img下，eg:avatar.jpg<br><img src="/2017/09/27/test-img/avatar.jpg" alt="测试"></p>
+<h3 id="生成页面"><a href="#生成页面" class="headerlink" title="生成页面"></a>生成页面</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo n <span class="string">"local-img"</span></div></pre></td></tr></table></figure>
+<p>会生成一个local-img.md 和一个local-img文件夹</p>
+<h3 id="md-引图片"><a href="#md-引图片" class="headerlink" title="md 引图片"></a>md 引图片</h3><p>将图片放在的local-img文件夹下，eg:avatar.jpg<br>markdown的方式引入图片<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![测试](avatar.jpg)</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/09/27/local-img/avatar.jpg" alt="测试"></p>
 
       
 
@@ -187,7 +189,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/27/test-img/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/09/27/local-img/">展开全文 >></a>
         </p>
       
 
@@ -253,7 +255,6 @@
 <h3 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h3><p>以yilia为例<br><a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="external">https://github.com/litten/hexo-theme-yilia</a></p>
 <h2 id="头像设置"><a href="#头像设置" class="headerlink" title="头像设置"></a>头像设置</h2><p>修改theme/yilia/_config.yml</p>
 <p>avatar: img/photo.jpg</p>
-<h3 id="文章中插入图片"><a href="#文章中插入图片" class="headerlink" title="文章中插入图片"></a>文章中插入图片</h3><p><img src="/2017/09/26/hexo-github/images/photo.jpg" alt="测试"></p>
 
       
 
