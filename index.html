@@ -175,8 +175,10 @@
 <h3 id="安装-hexo-asset-image"><a href="#安装-hexo-asset-image" class="headerlink" title="安装 hexo-asset-image"></a>安装 hexo-asset-image</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-asset-image --save</div></pre></td></tr></table></figure>
 <h3 id="生成页面"><a href="#生成页面" class="headerlink" title="生成页面"></a>生成页面</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo n <span class="string">"local-img"</span></div></pre></td></tr></table></figure>
 <p>会生成一个local-img.md 和一个local-img文件夹</p>
-<h3 id="md-引图片"><a href="#md-引图片" class="headerlink" title="md 引图片"></a>md 引图片</h3><p>将图片放在的local-img文件夹下，eg:avatar.jpg<br>markdown的方式引入图片<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![测试](avatar.jpg)</div></pre></td></tr></table></figure></p>
+<h3 id="md-引图片"><a href="#md-引图片" class="headerlink" title="md 引图片"></a>md 引图片</h3><p>将图片放在的local-img文件夹下，eg:avatar.jpg<br>markdown的方式引入图片<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![alt的文字](avatar.jpg)</div></pre></td></tr></table></figure></p>
 <p><img src="/2017/09/27/local-img/avatar.jpg" alt="测试"></p>
+<h3 id="或者"><a href="#或者" class="headerlink" title="或者"></a>或者</h3><p>在source 新建一个images目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![alt的文字](../../../../images/avatar.jpg)</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/09/27/local-img/../../../../images/avatar.jpg" alt="测试"></p>
 
       
 
