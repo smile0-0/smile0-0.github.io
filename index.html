@@ -158,7 +158,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/27/babel-1/">babel-1</a>
+      <a class="article-title" href="/2017/09/27/babel-1/">Babel基础大杂烩</a>
     </h1>
   
 
@@ -171,7 +171,38 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>#Babel的包构成</p>
+<h2 id="核心包"><a href="#核心包" class="headerlink" title="核心包"></a>核心包</h2><ul>
+<li>babel-core: babel转译器本身，提供babel的转译API，暴露babel.transform方法来编译源代码</li>
+<li>babylon: 语法解析</li>
+<li>babel-traverse: 用于对AST（抽象语法树）的遍历，主要给plugin用</li>
+<li>babel-generator: 根据AST生成代码</li>
+</ul>
+<p>###Babel的编译流程<br>主要分为三个阶段：parsing, transforming, and generation<br>流程如下<br>   input string(ES6代码输入)<br>-&gt; babylon parser(babylon进行语法解析)<br>-&gt; AST(得到抽象语法树)<br>-&gt; babel-traverse transformer<a href="babel-traverse对AST树进行遍历转译">s</a><br>-&gt; AST(得到新的语法树)<br>-&gt; babel-generator(babel-generator通过AST树生成ES5代码)<br>-&gt; output string(输出)</p>
+<h2 id="其他包"><a href="#其他包" class="headerlink" title="其他包"></a>其他包</h2><ul>
+<li>babel-cli: babel的命令行工具，通过命令行对JS代码进行转译</li>
+<li>babel-types: 用于检验、构建和改变AST树的节点</li>
+<li>babel-polyfill: JS标准新增的原生对象和API的shim，实现上仅仅是core-js和regenerator-runtime两个包的封装</li>
+<li>babel-runtime: 功能类似babel-polyfill，不会污染全局作用域，一般用于babel-plugin-transform-runtime用于library或plugin中</li>
+<li>babel-register: 通过绑定node.js的require来自动转译require引用的js代码文件</li>
+<li>babel-template: 辅助函数，用于从字符串形式的代码来构建AST树节点</li>
+<li>babel-helpers: 一系列预制的babel-template函数，用于提供给一些plugins使用</li>
+<li>babel-code-frame: 用于生成错误信息，打印出错误点源代码帧以及指出出错位置</li>
+</ul>
+<p>注：polyfill 是 shim 的一种。shim 是将不同 api 封装成一种，比如 jQuery 的 $.ajax 封装了 XMLHttpRequest 和 IE 用 ActiveXObject 方式创建 xhr 对象；polyfill 特指 shim 成的 api 是遵循标准的，其典型做法是在IE浏览器中增加 window.XMLHttpRequest ，内部实现使用 ActiveXObject。在实际中为了方便做对比，会特指 shim 的 api 不是遵循标准的，而是自己设计的。</p>
+<h2 id="Presets"><a href="#Presets" class="headerlink" title="Presets"></a>Presets</h2><p>Presets是一系列plugin的集合，用来描述对AST进行transform的转换关系<br>Babel 6之后取消了默认的transform，如果不配置任何plugins或者presets，Babel将会返回源码</p>
+<ul>
+<li>babel-preset-20XX: 标准的ES6特性插件集合</li>
+<li>babel-preset-env: Babel 的官网上在9月宣布 ES2015 / ES2016/ ES2017 等等 ES20xx 时代的 presets 通通被废弃（deprecated），取而代之的是 babel-preset-env(可以“自动”决定加载哪些插件和 polyfill 的 preset)，可以由开发者决定编译目标处于什么样的运行环境</li>
+<li>babel-preset-stage-X: 未被正式列入标准的ES6特性（ES7）<br>如果省事懒得折腾，一般设置为stage-0即可。如果为了防止开发人员使用某些太新的功能，我们可以限制到某个特定的stage即可</li>
+</ul>
+<h2 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h2><p>Babel的核心</p>
+<ul>
+<li>Transform Plugins: babel可以转译ES6，JSX，Flow等等，有许多不同的transform插件，主要在第二阶段transforming适用</li>
+<li>Syntax Plugins: Transform Plugins会自动使用对应的语法插件</li>
+<li>Helpers: 通常提供给插件内部使用</li>
+</ul>
+
       
 
       
@@ -240,7 +271,6 @@
 <h3 id="md-引图片"><a href="#md-引图片" class="headerlink" title="md 引图片"></a>md 引图片</h3><p>将图片放在的local-img文件夹下，eg:avatar.jpg<br>markdown的方式引入图片<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![alt的文字](avatar.jpg)</div></pre></td></tr></table></figure></p>
 <p><img src="/2017/09/27/local-img/avatar.jpg" alt="测试"></p>
 <h3 id="或者"><a href="#或者" class="headerlink" title="或者"></a>或者</h3><p>在source 新建一个images目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![alt的文字](../../../../images/avatar.jpg)</div></pre></td></tr></table></figure></p>
-<p><img src="/2017/09/27/local-img/../../../../images/avatar.jpg" alt="测试"></p>
 
       
 
