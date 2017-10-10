@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Babel基础大杂烩 | Smile</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Babel的包构成核心包 babel-core: babel转译器本身，提供babel的转译API，暴露babel.transform方法来编译源代码 babylon: 语法解析 babel-traverse: 用于对AST（抽象语法树）的遍历，主要给plugin用 babel-generator: 根据AST生成代码  ###Babel的编译流程主要分为三个阶段：parsing, transfo">
+  <meta name="description" content="Babel的包构成核心包 babel-core: babel转译器本身，提供babel的转译API，暴露babel.transform方法来编译源代码 babylon: 语法解析 babel-traverse: 用于对AST（抽象语法树）的遍历，主要给plugin用 babel-generator: 根据AST生成代码  Babel的编译流程主要分为三个阶段：parsing, transformi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Babel基础大杂烩">
 <meta property="og:url" content="http://yoursite.com/2017/09/27/babel-1/index.html">
 <meta property="og:site_name" content="Smile">
-<meta property="og:description" content="Babel的包构成核心包 babel-core: babel转译器本身，提供babel的转译API，暴露babel.transform方法来编译源代码 babylon: 语法解析 babel-traverse: 用于对AST（抽象语法树）的遍历，主要给plugin用 babel-generator: 根据AST生成代码  ###Babel的编译流程主要分为三个阶段：parsing, transfo">
-<meta property="og:updated_time" content="2017-10-10T07:25:37.000Z">
+<meta property="og:description" content="Babel的包构成核心包 babel-core: babel转译器本身，提供babel的转译API，暴露babel.transform方法来编译源代码 babylon: 语法解析 babel-traverse: 用于对AST（抽象语法树）的遍历，主要给plugin用 babel-generator: 根据AST生成代码  Babel的编译流程主要分为三个阶段：parsing, transformi">
+<meta property="og:updated_time" content="2017-10-10T08:01:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Babel基础大杂烩">
-<meta name="twitter:description" content="Babel的包构成核心包 babel-core: babel转译器本身，提供babel的转译API，暴露babel.transform方法来编译源代码 babylon: 语法解析 babel-traverse: 用于对AST（抽象语法树）的遍历，主要给plugin用 babel-generator: 根据AST生成代码  ###Babel的编译流程主要分为三个阶段：parsing, transfo">
+<meta name="twitter:description" content="Babel的包构成核心包 babel-core: babel转译器本身，提供babel的转译API，暴露babel.transform方法来编译源代码 babylon: 语法解析 babel-traverse: 用于对AST（抽象语法树）的遍历，主要给plugin用 babel-generator: 根据AST生成代码  Babel的编译流程主要分为三个阶段：parsing, transformi">
   
     <link rel="alternative" href="/atom.xml" title="Smile" type="application/atom+xml">
   
@@ -179,7 +179,7 @@
 <li>babel-traverse: 用于对AST（抽象语法树）的遍历，主要给plugin用</li>
 <li>babel-generator: 根据AST生成代码</li>
 </ul>
-<p>###Babel的编译流程<br>主要分为三个阶段：parsing, transforming, and generation<br>流程如下<br>   input string(ES6代码输入)<br>-&gt; babylon parser(babylon进行语法解析)<br>-&gt; AST(得到抽象语法树)<br>-&gt; babel-traverse transformer<a href="babel-traverse对AST树进行遍历转译">s</a><br>-&gt; AST(得到新的语法树)<br>-&gt; babel-generator(babel-generator通过AST树生成ES5代码)<br>-&gt; output string(输出)</p>
+<h3 id="Babel的编译流程"><a href="#Babel的编译流程" class="headerlink" title="Babel的编译流程"></a>Babel的编译流程</h3><p>主要分为三个阶段：parsing, transforming, and generation<br>流程如下：<br>   input string(ES6代码输入)<br>-&gt; babylon parser(babylon进行语法解析)<br>-&gt; AST(得到抽象语法树)<br>-&gt; babel-traverse transformer<a href="babel-traverse对AST树进行遍历转译">s</a><br>-&gt; AST(得到新的语法树)<br>-&gt; babel-generator(babel-generator通过AST树生成ES5代码)<br>-&gt; output string(输出)</p>
 <h2 id="其他包"><a href="#其他包" class="headerlink" title="其他包"></a>其他包</h2><ul>
 <li>babel-cli: babel的命令行工具，通过命令行对JS代码进行转译</li>
 <li>babel-types: 用于检验、构建和改变AST树的节点</li>
@@ -190,7 +190,9 @@
 <li>babel-helpers: 一系列预制的babel-template函数，用于提供给一些plugins使用</li>
 <li>babel-code-frame: 用于生成错误信息，打印出错误点源代码帧以及指出出错位置</li>
 </ul>
+<blockquote>
 <p>注：polyfill 是 shim 的一种。shim 是将不同 api 封装成一种，比如 jQuery 的 $.ajax 封装了 XMLHttpRequest 和 IE 用 ActiveXObject 方式创建 xhr 对象；polyfill 特指 shim 成的 api 是遵循标准的，其典型做法是在IE浏览器中增加 window.XMLHttpRequest ，内部实现使用 ActiveXObject。在实际中为了方便做对比，会特指 shim 的 api 不是遵循标准的，而是自己设计的。</p>
+</blockquote>
 <h2 id="Presets"><a href="#Presets" class="headerlink" title="Presets"></a>Presets</h2><p>Presets是一系列plugin的集合，用来描述对AST进行transform的转换关系<br>Babel 6之后取消了默认的transform，如果不配置任何plugins或者presets，Babel将会返回源码</p>
 <ul>
 <li>babel-preset-20XX: 标准的ES6特性插件集合</li>
@@ -203,6 +205,7 @@
 <li>Syntax Plugins: Transform Plugins会自动使用对应的语法插件</li>
 <li>Helpers: 通常提供给插件内部使用</li>
 </ul>
+<h1 id="Babel配置"><a href="#Babel配置" class="headerlink" title="Babel配置"></a>Babel配置</h1><p>.babelrc文件<br>常用Options字段</p>
 
       
 
