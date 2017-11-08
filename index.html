@@ -219,10 +219,7 @@
 </ul>
 <p>这是一个关于 Polyfill 的选项，当然首先你仍然需要额外安装 babel-polyfill<br>默认是：”false”</p>
 <h4 id="useBuiltIns-“usage”"><a href="#useBuiltIns-“usage”" class="headerlink" title="useBuiltIns: “usage”"></a>useBuiltIns: “usage”</h4><p>Babel 会在你使用到 ES2015+ 新特性时，自动添加 babel-polyfill 的引用，并且是 partial 级别的引用。<br>例如：</p>
-<pre><code class="bash">const promise = new Promise();
-const map = new Map();
-</code></pre>
-
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">const promise = new Promise();</div><div class="line">const map = new Map();</div><div class="line">``` </div><div class="line"></div><div class="line">会转译为：（如果环境不支持promise的话）</div><div class="line">``` bash</div><div class="line">import <span class="string">"babel-polyfill/lib/core-js/modules/es6.map"</span>;</div><div class="line">import <span class="string">"babel-polyfill/lib/core-js/modules/es6.promise"</span>;</div><div class="line"></div><div class="line">var promise = new Promise();</div><div class="line">var map = new Map();</div></pre></td></tr></table></figure>
       
 
       
