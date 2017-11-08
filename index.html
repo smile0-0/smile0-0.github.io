@@ -213,17 +213,15 @@
 <h3 id="targets-配置"><a href="#targets-配置" class="headerlink" title="targets 配置"></a>targets 配置</h3><p>根据<a href="https://github.com/ai/browserslist" target="_blank" rel="external">browserslist</a>对浏览器相关信息执行配置. 例如:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">// 支持大部分浏览器最新的两个版本以及IE 7+</div><div class="line">&#123;</div><div class="line">    <span class="string">"presets"</span>: [</div><div class="line">        [</div><div class="line">            <span class="string">"env"</span>, </div><div class="line">            &#123;</div><div class="line">                <span class="string">"targets"</span>: &#123;</div><div class="line">                    <span class="string">"browsers"</span>: [<span class="string">"last 2 versions"</span>, <span class="string">"ie &gt;= 7"</span>]</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        ]</div><div class="line">    ],</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h3 id="modules-配置"><a href="#modules-配置" class="headerlink" title="modules 配置"></a>modules 配置</h3><p>指定模块化方式，支持 AMD、UMD、SystemJS、CommonJS 等。当然在 Webpack 2/3 的时代，推荐将 modules 设置为 false，即交由 Webpack 来处理模块化<br>默认是：”commonjs”</p>
 <h3 id="useBuiltIns-配置"><a href="#useBuiltIns-配置" class="headerlink" title="useBuiltIns 配置"></a>useBuiltIns 配置</h3><ul>
-<li>注意：以下是beta版的功能，需要安装beta包</li>
-<li>npm install babel-polyfill@next –save</li>
-<li>npm install –save-dev babel-preset-env@next</li>
+<li>注意：以下是beta版的功能，需要安装beta包<br>npm install babel-polyfill@next –save<br>npm install –save-dev babel-preset-env@next *</li>
 </ul>
 <p>这是一个关于 Polyfill 的选项，当然首先你仍然需要额外安装 babel-polyfill<br>默认是：”false”</p>
 <h4 id="useBuiltIns-“usage”"><a href="#useBuiltIns-“usage”" class="headerlink" title="useBuiltIns: “usage”"></a>useBuiltIns: “usage”</h4><p>Babel 会在你使用到 ES2015+ 新特性时，自动添加 babel-polyfill 的引用，并且是 partial 级别的引用。<br>例如：</p>
 <p><code>const promise = new Promise();
 const map = new Map();</code></p>
 <p>会转译为：（如果环境不支持promise的话）</p>
-<p>``<br>import “babel-polyfill/lib/core-js/modules/es6.map”;<br>import “babel-polyfill/lib/core-js/modules/es6.promise”;</p>
-<p>var promise = new Promise();<br>var map = new Map();<br>``</p>
+<p>`<br>import “babel-polyfill/lib/core-js/modules/es6.map”;<br>import “babel-polyfill/lib/core-js/modules/es6.promise”;</p>
+<p>var promise = new Promise();<br>var map = new Map();<br>`</p>
 
       
 
