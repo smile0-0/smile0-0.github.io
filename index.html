@@ -171,18 +171,25 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Babel的包构成"><a href="#Babel的包构成" class="headerlink" title="Babel的包构成"></a>Babel的包构成</h1><h2 id="核心包"><a href="#核心包" class="headerlink" title="核心包"></a>核心包</h2><ul>
+        <h1 id="Babel介绍"><a href="#Babel介绍" class="headerlink" title="Babel介绍"></a>Babel介绍</h1><p>Babel 是一个通用的多用途 JavaScript 编译器。<br>Babel 把用最新标准编写的 JavaScript 代码向下编译成可以在今天随处可用的版本。 这一过程叫做“源码到源码”编译， 也被称为转换编译（transpiling，是一个自造合成词，即转换＋编译。以下也简称为转译）。<br>不过 Babel 的用途并不止于此，它支持语法扩展，能支持像 React 所用的 JSX 语法，同时还支持用于静态类型检查的流式语法（Flow Syntax）。</p>
+<h1 id="Babel的包构成"><a href="#Babel的包构成" class="headerlink" title="Babel的包构成"></a>Babel的包构成</h1><h2 id="核心包"><a href="#核心包" class="headerlink" title="核心包"></a>核心包</h2><ul>
 <li>babel-core: babel转译器本身，提供babel的转译API，暴露babel.transform方法来编译源代码</li>
 <li>babylon: 语法解析</li>
 <li>babel-traverse: 用于对AST（抽象语法树）的遍历，主要给plugin用</li>
 <li>babel-generator: 根据AST生成代码</li>
 </ul>
 <h3 id="Babel的编译流程"><a href="#Babel的编译流程" class="headerlink" title="Babel的编译流程"></a>Babel的编译流程</h3><p>主要分为三个阶段：parsing, transforming, and generation<br>流程如下：<br>   input string(ES6代码输入)<br>-&gt; babylon parser(babylon进行语法解析)<br>-&gt; AST(得到抽象语法树)<br>-&gt; babel-traverse transformer<a href="babel-traverse对AST树进行遍历转译">s</a><br>-&gt; AST(得到新的语法树)<br>-&gt; babel-generator(babel-generator通过AST树生成ES5代码)<br>-&gt; output string(输出)</p>
+<h2 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h2><p>Babel的核心</p>
+<ul>
+<li>Transform Plugins: babel可以转译ES6，JSX，Flow等等，有许多不同的transform插件，主要在第二阶段transforming适用</li>
+<li>Syntax Plugins: Transform Plugins会自动使用对应的语法插件</li>
+<li>Helpers: 通常提供给插件内部使用</li>
+</ul>
 <h2 id="其他包"><a href="#其他包" class="headerlink" title="其他包"></a>其他包</h2><ul>
 <li>babel-cli: babel的命令行工具，通过命令行对JS代码进行转译</li>
 <li>babel-types: 用于检验、构建和改变AST树的节点</li>
 <li>babel-polyfill: JS标准新增的原生对象和API的shim，实现上仅仅是core-js和regenerator-runtime两个包的封装</li>
-<li>babel-runtime: 功能类似babel-polyfill，不会污染全局作用域，一般用于babel-plugin-transform-runtime用于library或plugin中</li>
+<li>babel-runtime: 功能类似babel-polyfill，不会污染全局作用域，babel-plugin-transform-runtime插件依赖babel-runtime包，一般用于library或plugin中</li>
 <li>babel-register: 通过绑定node.js的require来自动转译require引用的js代码文件</li>
 <li>babel-template: 辅助函数，用于从字符串形式的代码来构建AST树节点</li>
 <li>babel-helpers: 一系列预制的babel-template函数，用于提供给一些plugins使用</li>
@@ -193,17 +200,30 @@
 </blockquote>
 <h2 id="Presets"><a href="#Presets" class="headerlink" title="Presets"></a>Presets</h2><p>Presets是一系列plugin的集合，用来描述对AST进行transform的转换关系<br>Babel 6之后取消了默认的transform，如果不配置任何plugins或者presets，Babel将会返回源码</p>
 <ul>
-<li>babel-preset-20XX: 标准的ES6特性插件集合</li>
+<li>babel-preset-20XX: 该年份批准的标准的ES6特性插件集合</li>
 <li>babel-preset-env: Babel 的官网上在9月宣布 ES2015 / ES2016/ ES2017 等等 ES20xx 时代的 presets 通通被废弃（deprecated），取而代之的是 babel-preset-env(可以“自动”决定加载哪些插件和 polyfill 的 preset)，可以由开发者决定编译目标处于什么样的运行环境</li>
-<li>babel-preset-stage-X: 未被正式列入标准的ES6特性（ES7）<br>如果省事懒得折腾，一般设置为stage-0即可。如果为了防止开发人员使用某些太新的功能，我们可以限制到某个特定的stage即可</li>
+<li>babel-preset-stage-X: 未被正式列入标准的ES6特性（ES7）<br>如果省事懒得折腾，一般设置为stage-0即可。如果为了防止开发人员使用某些太新的功能，我们可以限制到某个特定的stage即可<br>stage-X都是实验版的preset</li>
 </ul>
-<h2 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h2><p>Babel的核心</p>
-<ul>
-<li>Transform Plugins: babel可以转译ES6，JSX，Flow等等，有许多不同的transform插件，主要在第二阶段transforming适用</li>
-<li>Syntax Plugins: Transform Plugins会自动使用对应的语法插件</li>
-<li>Helpers: 通常提供给插件内部使用</li>
+<h1 id="Babel配置"><a href="#Babel配置" class="headerlink" title="Babel配置"></a>Babel配置</h1><p>.babelrc文件<br>常用Options字段<br>presets: 要加载和使用的preset列表，preset名前的babel-preset-可省略；presets列表的preset按从尾到头的逆序运行<br>plugins: 要加载和使用的插件列表，插件名前的babel-plugin-可省略；plugin列表按从头到尾的顺序运行<br>注：同时设置了presets和plugins，那么plugins的先运行<br>示例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="string">"presets"</span>: [</div><div class="line">        [</div><div class="line">            <span class="string">"env"</span>, </div><div class="line">            &#123;</div><div class="line">                <span class="string">"exclude"</span>: [</div><div class="line">                    <span class="string">"transform-regenerator"</span>,</div><div class="line">                    <span class="string">"transform-async-to-generator"</span></div><div class="line">                ],</div><div class="line">                <span class="string">"modules"</span>: <span class="literal">false</span> </div><div class="line">            &#125;</div><div class="line">        ]</div><div class="line">    ],</div><div class="line">    <span class="string">"plugins"</span>: [</div><div class="line">        [</div><div class="line">            <span class="string">"transform-runtime"</span>,</div><div class="line">            &#123;</div><div class="line">                <span class="string">"regenerator"</span>: <span class="literal">false</span></div><div class="line">            &#125;</div><div class="line">        ],</div><div class="line">        <span class="string">"fast-async"</span></div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="babel-preset-env详解"><a href="#babel-preset-env详解" class="headerlink" title="babel-preset-env详解"></a>babel-preset-env详解</h1><h2 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h2><ul>
+<li>babel-preset-es20XX：增量支持不同版本的ECMAScript.<br>babel-preset-es2015将含有ES6新特性的代码编译为ES5下的代码, babel-preset-es2016则将含有ES2016新特性的代码编译为ES6下的代码.</li>
+<li>babel-preset-latest: 支持编译所有ECMAScript版本下特性或处于stage4阶段的特性的代码<br>这些preset的问题就是: 它们都太”重”了, 即包含了过多在某些情况下不需要的功能. 比如, 现代的浏览器大多支持ES6的generator, 但是如果你使用babel-preset-es2015, 它会将generator函数编译为复杂的ES5代码, 这是没有必要的.</li>
 </ul>
-<h1 id="Babel配置"><a href="#Babel配置" class="headerlink" title="Babel配置"></a>Babel配置</h1><p>.babelrc文件<br>常用Options字段</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>babel-preset-env和babel-preset-latest的功能很相似, 但使用babel-preset-env, 我们可以声明环境, 然后该preset就会只编译包含我们所声明环境缺少的特性的代码.<br>没有任何配置时，<br>babel-preset-env<br>= babel-preset-latest<br>= babel-preset-es2015 + babel-preset-es2016 + babel-preset-es2017</p>
+<h3 id="targets-配置"><a href="#targets-配置" class="headerlink" title="targets 配置"></a>targets 配置</h3><p>根据<a href="https://github.com/ai/browserslist" target="_blank" rel="external">browserslist</a>对浏览器相关信息执行配置. 例如:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">// 支持大部分浏览器最新的两个版本以及IE 7+</div><div class="line">&#123;</div><div class="line">    <span class="string">"presets"</span>: [</div><div class="line">        [</div><div class="line">            <span class="string">"env"</span>, </div><div class="line">            &#123;</div><div class="line">                <span class="string">"targets"</span>: &#123;</div><div class="line">                    <span class="string">"browsers"</span>: [<span class="string">"last 2 versions"</span>, <span class="string">"ie &gt;= 7"</span>]</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        ]</div><div class="line">    ],</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="modules-配置"><a href="#modules-配置" class="headerlink" title="modules 配置"></a>modules 配置</h3><p>指定模块化方式，支持 AMD、UMD、SystemJS、CommonJS 等。当然在 Webpack 2/3 的时代，推荐将 modules 设置为 false，即交由 Webpack 来处理模块化<br>默认是：”commonjs”</p>
+<h3 id="useBuiltIns-配置"><a href="#useBuiltIns-配置" class="headerlink" title="useBuiltIns 配置"></a>useBuiltIns 配置</h3><ul>
+<li>注意：以下是beta版的功能，需要安装beta包</li>
+<li>npm install babel-polyfill@next –save</li>
+<li>npm install –save-dev babel-preset-env@next</li>
+</ul>
+<p>这是一个关于 Polyfill 的选项，当然首先你仍然需要额外安装 babel-polyfill<br>默认是：”false”</p>
+<h4 id="useBuiltIns-“usage”"><a href="#useBuiltIns-“usage”" class="headerlink" title="useBuiltIns: “usage”"></a>useBuiltIns: “usage”</h4><p>Babel 会在你使用到 ES2015+ 新特性时，自动添加 babel-polyfill 的引用，并且是 partial 级别的引用。<br>例如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">const promise = new Promise();</div><div class="line">const map = new Map();</div><div class="line">``` </div><div class="line">会转译为：（如果环境不支持promise的话）</div><div class="line">``` bash</div><div class="line">import <span class="string">"babel-polyfill/lib/core-js/modules/es6.map"</span>;</div><div class="line">import <span class="string">"babel-polyfill/lib/core-js/modules/es6.promise"</span>;</div><div class="line"></div><div class="line">var promise = new Promise();</div><div class="line">var map = new Map();</div><div class="line">``` </div><div class="line"></div><div class="line"><span class="comment">#### useBuiltIns: "entry"</span></div><div class="line">很多人习惯于在 vendor 中一次性引入 babel-polyfill，在过去这将导致整个 babel-polyfill 包被打包到 vendor 中，在方便开发的同时失去了灵活性，而现在你可以将 useBuiltIns 设置为 entry，Babel 会自动进行优化：</div><div class="line"></div><div class="line">例如：</div><div class="line">vendor.js ：</div><div class="line">```bash</div><div class="line">import <span class="string">'babel-polyfill'</span>;</div></pre></td></tr></table></figure></p>
+<p>index.js：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">const promise = new Promise();</div><div class="line">const map = new Map();</div></pre></td></tr></table></figure></p>
+<p>最终 vendor.js 会被转译为：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import <span class="string">"babel-polyfill/core-js/modules/es6.map"</span>;</div><div class="line">import <span class="string">"babel-polyfill/core-js/modules/es6.promise"</span>;</div></pre></td></tr></table></figure></p>
+<h2 id="babel-polyfill-和-babel-runtime的区别"><a href="#babel-polyfill-和-babel-runtime的区别" class="headerlink" title="babel-polyfill 和 babel-runtime的区别"></a>babel-polyfill 和 babel-runtime的区别</h2><p>Babel默认只转换新的JavaScript句法（syntax），而不转换新的API，比如Iterator、Generator、Set、Maps、Proxy、Reflect、Symbol、Promise等全局对象，以及一些定义在全局对象上的方法（比如Object.assign）都不会转码。<br>举例来说，ES6在Array对象上新增了Array.from方法。Babel就不会转码这个方法。如果想让这个方法运行，必须使用babel-polyfill 或者 babel-runtime，为当前环境提供一个垫片。<br>Babel默认不转码的API非常多，详细清单可以查看babel-plugin-transform-runtime模块的<a href="https://github.com/babel/babel/blob/master/packages/babel-plugin-transform-runtime/src/definitions.js" target="_blank" rel="external">definitions.js</a>文件。</p>
+<p>二者最大的区别：babel-polyfill 会污染全局命名空间；babel-runtime 不会污染全局命名空间<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">let</span> t = &#123;</div><div class="line">    a: 1,</div><div class="line">    b: 2</div><div class="line">&#125;;</div><div class="line">Object.assign(t, &#123;</div><div class="line">    c: 3</div><div class="line">&#125;);</div><div class="line">``` </div><div class="line"></div><div class="line">引入babel-polyfill会转译成：</div><div class="line">``` bash</div><div class="line">import <span class="string">"babel-polyfill/lib/core-js/modules/es6.object.assign"</span>;</div><div class="line">var t = &#123;</div><div class="line">  a: 1,</div><div class="line">  b: 2</div><div class="line">&#125;;</div><div class="line">Object.assign(t, &#123;</div><div class="line">  c: 3</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>引入babel-runtime（可通过调用babel-plugin-transform-runtime插件引入）会转译成：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var _Object<span class="variable">$assign</span> = require(<span class="string">"babel-runtime/core-js/object/assign"</span>);</div><div class="line">var t = &#123;</div><div class="line">  a: 1,</div><div class="line">  b: 2</div><div class="line">&#125;;</div><div class="line">_Object<span class="variable">$assign</span>(t, &#123;</div><div class="line">  c: 3</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
 
       
 
@@ -212,6 +232,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">babel</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -555,6 +586,10 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">babel</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
