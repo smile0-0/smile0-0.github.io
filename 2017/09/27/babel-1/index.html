@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/09/27/babel-1/index.html">
 <meta property="og:site_name" content="Smile">
 <meta property="og:description" content="Babel介绍Babel 是一个通用的多用途 JavaScript 编译器。Babel 把用最新标准编写的 JavaScript 代码向下编译成可以在今天随处可用的版本。 这一过程叫做“源码到源码”编译， 也被称为转换编译（transpiling，是一个自造合成词，即转换＋编译。以下也简称为转译）。不过 Babel 的用途并不止于此，它支持语法扩展，能支持像 React 所用的 JSX 语法，同时">
-<meta property="og:updated_time" content="2017-11-08T09:20:04.000Z">
+<meta property="og:updated_time" content="2017-11-08T09:24:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Babel基础大杂烩">
 <meta name="twitter:description" content="Babel介绍Babel 是一个通用的多用途 JavaScript 编译器。Babel 把用最新标准编写的 JavaScript 代码向下编译成可以在今天随处可用的版本。 这一过程叫做“源码到源码”编译， 也被称为转换编译（transpiling，是一个自造合成词，即转换＋编译。以下也简称为转译）。不过 Babel 的用途并不止于此，它支持语法扩展，能支持像 React 所用的 JSX 语法，同时">
@@ -219,13 +219,15 @@
 <li>注意：以下是beta版的功能，需要安装beta包<br>npm install babel-polyfill@next –save<br>npm install –save-dev babel-preset-env@next *</li>
 </ul>
 <p>这是一个关于 Polyfill 的选项，当然首先你仍然需要额外安装 babel-polyfill<br>默认是：”false”</p>
-<h4 id="useBuiltIns-“usage”"><a href="#useBuiltIns-“usage”" class="headerlink" title="useBuiltIns: “usage”"></a>useBuiltIns: “usage”</h4><p>Babel 会在你使用到 ES2015+ 新特性时，自动添加 babel-polyfill 的引用，并且是 partial 级别的引用。<br>例如：</p>
-<p><code>const promise = new Promise();
-const map = new Map();</code></p>
-<p>会转译为：（如果环境不支持promise的话）</p>
-<p>`<br>import “babel-polyfill/lib/core-js/modules/es6.map”;<br>import “babel-polyfill/lib/core-js/modules/es6.promise”;</p>
-<p>var promise = new Promise();<br>var map = new Map();<br>`</p>
-
+<h4 id="useBuiltIns-“usage”"><a href="#useBuiltIns-“usage”" class="headerlink" title="useBuiltIns: “usage”"></a>useBuiltIns: “usage”</h4><p>Babel 会在你使用到 ES2015+ 新特性时，自动添加 babel-polyfill 的引用，并且是 partial 级别的引用。</p>
+<ul>
+<li>例如：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">const promise = new Promise();</div><div class="line">const map = new Map();</div></pre></td></tr></table></figure>
+<ul>
+<li>会转译为：（如果环境不支持promise的话）</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">import <span class="string">"babel-polyfill/lib/core-js/modules/es6.map"</span>;</div><div class="line">import <span class="string">"babel-polyfill/lib/core-js/modules/es6.promise"</span>;</div><div class="line"></div><div class="line">var promise = new Promise();</div><div class="line">var map = new Map();</div></pre></td></tr></table></figure>
       
 
       
